@@ -1,0 +1,269 @@
+// imports
+@import "node_modules/bourbon/core/_bourbon.scss";
+@import "node_modules/font-awesome/css/font-awesome.css";
+@import "node_modules/bourbon/core/_bourbon.scss";
+
+// colors
+$accent: #142933;
+
+// site colors (main header)
+$titleHeader:    #33664d; //default: used at KFLLM, ELP
+
+// sub site colors (data entry section)
+$detailHeader:  #513A35; //brown for raw logs
+
+$grey: #CCC;
+$greyDark: #999;
+$greySorted: #BBB;
+$white: #FFF;
+$offWhite: #EFEFEF;
+$black: #000;
+$gradient: #E3E3E3;
+$gradientDark: darken($gradient,7);
+$offGradient: #DDD;
+$offGradientDark: darken($offGradient, 7);
+
+// variables
+$linkColor: $accent;
+
+// reset
+* {
+  margin: 0;
+}
+
+// base style
+body {
+  font-family: "Georgia", Times, serif;
+}
+html, body {
+  height: 100%;
+}
+header {
+  padding-left: 6em;
+}
+main article {
+  padding: 0 1.6em 1em;
+  margin-bottom: 3em;
+}
+a {
+    color: $linkColor;
+}
+i[onclick], .cursorPointer {
+    cursor: pointer;
+}
+.centroid {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-weight: bold;
+}
+.floatleft {
+  float: left;
+  margin-left: 1em;
+}
+.floatleft:first-child {
+  margin-left: 0;
+}
+.clearboth {
+  clear: both;
+}
+// headers
+h1, h2, h3, h4, h5 {
+  text-align: center;
+  font-family: "Arial Black", Gadget, sans-serif;
+  margin: 1em 1.6em;
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.3);
+  &.left { text-align: left; }
+  &.right { text-align: right; }
+}
+h1 {
+    font-size: 3em;
+}
+h2 {
+    font-size: 1.6em;
+}
+h2 a {
+    color: $titleHeader;
+}
+img.logo {
+    cursor: pointer;
+    vertical-align: middle;
+    height: 80px;
+}
+nav.title {
+    position: relative;
+    width: 100%;
+    padding: 1px;
+    // text-align: center;
+    height: 109px;
+     //background-image( linear-gradient(to top, $titleHeader, lighten($titleHeader,10)));
+    color: $white;
+    h1 {
+        font-size: 33px;
+        line-height: 70px;
+        text-shadow: 1px 1px 0px rgba(255,255,255,0.3), -1px -1px 0px rgba(0,0,0,0.4);
+        margin: 16px 0 0 0;
+    }
+}
+main {
+    a {
+        text-shadow: none;
+    }
+}
+header.details {
+    // margin-top: 1em;
+    padding: 1em 1.6em;
+    box-shadow: 0 1px 3px rgba(100,100,100,20);
+    & > h2 { margin-top: 0; }
+    // colors
+    color: $white;
+    //@include background-image( linear-gradient(to top, $detailHeader, lighten($detailHeader,5)));
+    a {color: $offWhite;}
+    p {
+      float: left;
+      margin-left: 1em;
+    }
+    p:first-child {
+      margin-left: 0;
+    }
+}
+main, header.details {
+    span {
+        display: table;
+        margin: 0 auto;
+    }
+    span + span {
+        margin-top: 0.6em;
+    }
+}
+
+// tables
+table.table {
+    width: 100%;
+    thead {
+        background: $grey;
+        font-weight: bold;
+    }
+    td {
+      text-align: center;
+      span {
+        display: inline;
+      }
+    }
+    td.left { text-align: left; }
+    td.right { text-align: right; }
+    tr {
+        transition: background 0.2s linear;
+    }
+    tbody > tr {
+        background-color: $white;
+        &.even:nth-child(n) { background-color: $white; }
+        &:nth-child(odd), &.odd {
+            background-color: $offWhite;
+        }
+        &.deleted {
+            background-color: #eebbbb;
+            &:nth-child(odd) {
+                background-color: #ffcccc;
+            }
+        }
+        &.added {
+            background-color: #d9eacd;
+            &:nth-child(odd) {
+                background-color: #e1f2d5;
+            }
+        }
+        &.changed {
+            background-color: #ffffaa;
+            &:nth-child(odd) {
+                background-color: #ffffcc;
+            }
+        }
+        &.dirty {
+            background-color: #FFD899;
+            &:nth-child(odd) {
+                background-color: #FFE0A1;
+            }
+        }
+    }
+}
+th > span[data-ember-action] { // for sorting columns
+  color: $white;
+  cursor: pointer;
+  display: inline;
+}
+td > span {
+  cursor: pointer;
+  color: $linkColor;
+}
+th.sorted {
+  background-color: $greySorted;
+  span { color: $black; }
+}
+tr.zero td.quantity {
+  color: $greyDark;
+}
+td.bold {
+    font-weight: bold;
+}
+.dirty {
+  background-color: #FFD899 !important;
+}
+
+//forms
+
+#{$all-text-inputs} {
+    width: 8em;
+    text-align: center;
+    &.error {
+        box-shadow: 0 0 5px #ff3333;
+        border: 1px solid #ff3333;
+    }
+}
+textarea { width: 100%; }
+input[type="text"].time { width: 4em; }
+span.form {
+  padding: 0.6em;
+  background: #EEE;
+  margin: 0 auto;
+  p {
+    font-weight: bold;
+    padding: 0.3em;
+    margin: 0.6em;
+    background: #FFF;
+    span {
+      display: inline;
+    }
+    &:last-child {
+      text-align: center;
+    }
+    input {
+      float: right;
+      font-size: 0.8em;
+      font-weight: bold;
+      margin: 0 0.6em;
+    }
+  }
+}
+
+//column gradients
+.bar_0 { background: rgba(0,0,0,0) }
+@for $i from 1 through 24 {
+    .bar_#{$i*4} {
+        //@include linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,0) #{99-$i*4+'%'}, $gradient #{100-$i*4+'%'}, $gradientDark)
+    }
+    tr:nth-child(odd) .bar_#{$i*4} {
+        //@include linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,0) #{99-$i*4+'%'}, $offGradient #{100-$i*4+'%'}, $offGradientDark)
+    }
+}
+.bar_100 {
+  //@include linear-gradient(to right, $gradientDark, $gradient)
+}
+tr:nth-child(odd) {
+    .bar_100 {
+      //@include linear-gradient(to right, $offGradientDark, $offGradient)
+    }
+}
